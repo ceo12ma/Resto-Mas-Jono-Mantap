@@ -242,7 +242,7 @@
         .drop-shadow-xl { filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08)); }
         .drop-shadow-2xl { filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15)); }
 
-        /* Layout & Position Utilities (tetap sama) */
+        /* Layout & Position Utilities */
         .h-auto { height: auto; }
         .h-5 { height: 1.25rem; }
         .h-14 { height: 3.5rem; }
@@ -360,7 +360,7 @@
         /* Other Utilities */
         .object-cover { object-fit: cover; }
         
-        /* Navigasi Link Styling - REMOVED UNDERLINE */
+        /* Navigasi Link Styling */
         nav a {
             text-decoration: none; /* Menghilangkan underline secara default */
             position: relative;
@@ -382,13 +382,13 @@
             transform: scaleX(1);
         }
 
-        /* Maps Link Styling - REMOVED UNDERLINE */
+        /* Maps Link Styling */
         #maps-link {
             text-decoration: none; /* Menghilangkan underline */
             color: var(--color-text-light); /* Warna teks link */
         }
         #maps-link:hover {
-            text-decoration: none; /* Bisa tambahkan underline saat hover jika diinginkan */
+            text-decoration: underline; /* Bisa tambahkan underline saat hover jika diinginkan */
             text-underline-offset: 3px;
             color: var(--color-orange-300); /* Warna hover untuk link */
         }
@@ -400,13 +400,21 @@
 
         /* Responsive adjustments for specific elements */
         @media (max-width: 767px) {
-            .header-nav-wrapper {
-                flex-grow: 1; 
-                justify-content: flex-end; 
-                gap: 1rem; 
+            .header-nav { /* Sembunyikan navigasi di layar kecil */
+                display: none;
             }
-            .header-nav {
-                display: none; /* Sembunyikan navigasi di layar kecil, bisa diganti dengan menu burger */
+            .header-nav-wrapper {
+                justify-content: flex-end; /* Pindahkan keranjang dan hamburger ke kanan */
+                gap: 1rem;
+                flex-grow: 1;
+            }
+            .hamburger-menu-icon { /* Tampilkan hamburger di layar kecil */
+                display: block;
+            }
+        }
+        @media (min-width: 768px) {
+            .hamburger-menu-icon { /* Sembunyikan hamburger di layar besar */
+                display: none;
             }
         }
 
@@ -427,6 +435,7 @@
             box-shadow: 0 5px 15px rgba(var(--color-primary-medium-rgb), 0.25);
             border: 2px solid transparent;
             text-decoration: none; /* Remove underline */
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -583,8 +592,326 @@
         .logo-banner-section {
             display: none; /* Hide the section if it was kept separately */
         }
-        header #main-header a[href="#beranda"] {
-            text-decoration: none !important; /* Memastikan tidak ada underline */
+
+        /* NEW: Remove underline specifically from header logo text */
+        header a[href="#beranda"] {
+            text-decoration: none !important; /* Memastikan tidak ada underline pada logo di header */
+        }
+
+        /* --- Cart Modal & Hamburger Menu Styling --- */
+
+        /* Cart Modal Overlay */
+        .cart-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .cart-modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Cart Modal Content */
+        .cart-modal-content {
+            background-color: var(--color-background-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 90vh; /* Limit height for scrollable content */
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-modal-overlay.open .cart-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        .cart-modal-header h3 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: var(--color-text-dark);
+        }
+        .cart-modal-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-gray-500);
+            transition: color 0.2s ease-in-out;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .cart-modal-close-btn:hover {
+            color: var(--color-red-alert);
+            background-color: var(--color-gray-100);
+        }
+
+        /* Cart Item List */
+        .cart-items-list {
+            flex-grow: 1;
+            overflow-y: auto; /* Make cart list scrollable */
+            padding-right: 0.5rem; /* Space for scrollbar */
+            margin-bottom: 1.5rem;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed var(--color-gray-100);
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+        .cart-item-info img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .cart-item-details .name {
+            font-weight: 600; /* font-semibold */
+            color: var(--color-text-dark);
+            font-size: 1.125rem; /* text-lg */
+        }
+        .cart-item-details .price {
+            color: var(--color-primary-medium);
+            font-weight: 500; /* font-medium */
+        }
+
+        /* Quantity Controls in Cart */
+        .cart-item-quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--color-gray-50);
+            border-radius: 9999px; /* rounded-full */
+            padding: 0.25rem;
+            border: 1px solid var(--color-gray-200);
+        }
+        .cart-item-quantity-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            border-radius: 9999px;
+        }
+        .cart-item-quantity-btn:hover {
+            background-color: var(--color-primary-light);
+            color: var(--color-text-white);
+        }
+        .cart-item-quantity-btn:active {
+            transform: scale(0.95);
+        }
+        .cart-item-quantity {
+            font-weight: 600;
+            color: var(--color-text-dark);
+            min-width: 2rem;
+            text-align: center;
+        }
+        .cart-item-remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-red-alert);
+            margin-left: 0.75rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        .cart-item-remove-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Cart Summary & Footer */
+        .cart-summary {
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gray-200);
+            margin-top: auto; /* Push summary to bottom */
+        }
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .cart-summary-row.total {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: var(--color-primary-dark);
+        }
+
+        /* Empty Cart Message */
+        #empty-cart-message {
+            text-align: center;
+            color: var(--color-gray-500);
+            font-style: italic;
+            padding: 2rem 0;
+        }
+
+        /* --- Quantity Controls on Menu Cards --- */
+        .menu-item-quantity-controls {
+            display: none; /* Hidden by default, show when item is in cart */
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--color-gray-50);
+            border-radius: 9999px;
+            padding: 0.25rem;
+            border: 1px solid var(--color-gray-200);
+            margin-left: auto; /* Push to right */
+        }
+        .menu-item-quantity-controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            border-radius: 9999px;
+        }
+        .menu-item-quantity-controls button:hover {
+            background-color: var(--color-primary-light);
+            color: var(--color-text-white);
+        }
+        .menu-item-quantity-controls button:active {
+            transform: scale(0.95);
+        }
+        .menu-item-quantity-controls input {
+            width: 2.5rem; /* Cukup lebar untuk angka */
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            -moz-appearance: textfield; /* Hide arrows in Firefox */
+        }
+        .menu-item-quantity-controls input::-webkit-outer-spin-button,
+        .menu-item-quantity-controls input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Hide add-to-cart button when quantity controls are visible */
+        .add-to-cart-btn.hidden {
+            display: none;
+        }
+        .menu-item-quantity-controls.visible {
+            display: flex;
+        }
+
+        /* --- Mobile Navigation (Hamburger Menu) --- */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 98;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .mobile-nav-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+        .mobile-nav-sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden off-screen */
+            width: 280px; /* Width of sidebar */
+            height: 100%;
+            background-color: var(--color-background-card);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+        }
+        .mobile-nav-sidebar.open {
+            right: 0;
+        }
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        .mobile-nav-header h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700;
+            color: var(--color-primary-dark);
+        }
+        .mobile-nav-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-gray-500);
+            transition: color 0.2s ease-in-out;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .mobile-nav-close-btn:hover {
+            color: var(--color-text-dark);
+            background-color: var(--color-gray-100);
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            transition: color 0.2s ease-in-out;
+        }
+        .mobile-nav-links a:hover {
+            color: var(--color-primary-medium);
         }
     </style>
 </head>
@@ -613,12 +940,15 @@
                         <span class="underline-effect"></span>
                     </a>
                 </nav>
-                <div class="relative ml-4" aria-label="Keranjang Belanja">
+                <button id="cart-icon-btn" class="relative ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer" aria-label="Buka Keranjang Belanja">
                     <i data-lucide="shopping-cart" class="text-gray-700" width="24" height="24" aria-hidden="true"></i>
                     <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden" aria-live="polite" aria-atomic="true">
                         0
                     </span>
-                </div>
+                </button>
+                <button id="hamburger-menu-btn" class="ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer hamburger-menu-icon" aria-label="Buka Menu Navigasi">
+                    <i data-lucide="menu" class="text-gray-700" width="24" height="24" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -659,7 +989,7 @@
                         Kami percaya bahwa makanan bukan sekadar pengisi perut, melainkan pengalaman yang menghangatkan hati. Itulah mengapa kami selalu menjaga kualitas bahan baku dan proses memasak untuk memastikan setiap hidangan Ayam Kremes Mas Jono memberikan sensasi renyah, gurih, dan lezat yang tak terlupakan. Bergabunglah dengan ribuan pelanggan setia kami dan rasakan sendiri bedanya!
                     </p>
                     <a href="#kontak" class="inline-flex items-center gap-2 btn cta-button">
-                        <i data-lucide="award" width="22" height="22" aria-hidden="true"></i> Penghargaan & Prestasi <i data-lucide="chevron-right" class="ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
+                        <i data-lucide="award" width="22" height="22" aria-hidden="true"></i> Kontak Kami <i data-lucide="chevron-right" class="ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -710,7 +1040,7 @@
                 <h3 class="text-2xl font-bold mb-4 text-orange-400 drop-shadow">Jam Operasional</h3>
                 <ul class="text-gray-400 space-y-3 text-base">
                     <li>Senin - Jumat: <span class="font-semibold text-white">10.00 - 22.00 WIB</span></li>
-                    <li>Satlu - Minggu: <span class="font-semibold text-white">10.00 - 23.00 WIB</span></li>
+                    <li>Sabtu - Minggu: <span class="font-semibold text-white">10.00 - 23.00 WIB</span></li>
                     <li>Hari Libur Nasional: <span class="font-semibold text-red-400">Tutup</span></li>
                 </ul>
             </div>
@@ -729,6 +1059,50 @@
             <button id="checkout-button" class="btn btn-secondary">
                 Bayar <i data-lucide="chevron-right" width="18" height="18" aria-hidden="true"></i>
             </button>
+        </div>
+    </div>
+
+    <div id="cart-modal-overlay" class="cart-modal-overlay">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Keranjang Belanja</h3>
+                <button class="cart-modal-close-btn" aria-label="Tutup Keranjang Belanja">
+                    <i data-lucide="x" width="28" height="28" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div id="cart-items-list" class="cart-items-list custom-scrollbar">
+                <p id="empty-cart-message">Keranjang Anda masih kosong.</p>
+            </div>
+            <div class="cart-summary">
+                <div class="cart-summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="font-semibold">Rp0</span>
+                </div>
+                <div class="cart-summary-row total">
+                    <span>Total:</span>
+                    <span id="cart-final-total">Rp0</span>
+                </div>
+                <button id="cart-modal-checkout-btn" class="btn btn-primary w-full mt-6">
+                    Lanjutkan Pembayaran via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-nav-overlay" class="mobile-nav-overlay">
+        <div id="mobile-nav-sidebar" class="mobile-nav-sidebar">
+            <div class="mobile-nav-header">
+                <h3>Navigasi</h3>
+                <button class="mobile-nav-close-btn" aria-label="Tutup Menu Navigasi">
+                    <i data-lucide="x" width="28" height="28" aria-hidden="true"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="#beranda">Beranda</a>
+                <a href="#menu">Menu</a>
+                <a href="#tentang">Tentang Kami</a>
+                <a href="#kontak">Kontak</a>
+            </nav>
         </div>
     </div>
 
@@ -771,6 +1145,11 @@
             return price.toLocaleString('id-ID');
         }
 
+        // Fungsi untuk mendapatkan item dari keranjang berdasarkan ID
+        function getCartItemById(itemId) {
+            return cartItems.find(item => item.id === itemId);
+        }
+
         // Fungsi untuk memperbarui tampilan keranjang di header
         function updateCartHeaderCount() {
             const cartItemCountElement = document.getElementById('cart-item-count');
@@ -778,7 +1157,7 @@
             if (totalCount > 0) {
                 cartItemCountElement.textContent = totalCount;
                 cartItemCountElement.classList.remove('hidden');
-                // Animasi bounceIn bisa di-trigger ulang jika diinginkan
+                // Trigger bounceIn animation
                 cartItemCountElement.classList.remove('animate-bounceIn');
                 void cartItemCountElement.offsetWidth; // Trigger reflow
                 cartItemCountElement.classList.add('animate-bounceIn');
@@ -809,22 +1188,136 @@
             }
         }
 
-        // Fungsi untuk menambahkan item ke keranjang
-        function addToCart(item) {
-            const existingItemIndex = cartItems.findIndex(i => i.name === item.name);
-            if (existingItemIndex > -1) {
-                cartItems[existingItemIndex].quantity += 1;
-            } else {
-                cartItems.push({ ...item, quantity: 1 });
+        // Fungsi untuk memperbarui tampilan modal keranjang
+        function updateCartModal() {
+            const cartList = document.getElementById('cart-items-list');
+            const emptyMessage = document.getElementById('empty-cart-message');
+            const cartSubtotalElement = document.getElementById('cart-subtotal');
+            const cartFinalTotalElement = document.getElementById('cart-final-total');
+
+            // --- FIX START ---
+            // Safety checks for null elements
+            if (!cartList || !emptyMessage || !cartSubtotalElement || !cartFinalTotalElement) {
+                console.error("Error: One or more cart modal elements not found in DOM.");
+                return; // Stop execution if elements are missing
             }
+            // --- FIX END ---
+
+            cartList.innerHTML = ''; // Clear previous items
+
+            let subtotal = 0;
+
+            if (cartItems.length === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
+                cartItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div class="cart-item-info">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/60x60/FFE8CC/6B4000?text=Food';">
+                            <div class="cart-item-details">
+                                <span class="name">${item.name}</span>
+                                <span class="price">Rp${formatPrice(item.price)}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="cart-item-quantity-controls">
+                                <button class="cart-item-quantity-btn decrease-quantity" data-id="${item.id}">-</button>
+                                <span class="cart-item-quantity">${item.quantity}</span>
+                                <button class="cart-item-quantity-btn increase-quantity" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="cart-item-remove-btn" data-id="${item.id}" aria-label="Hapus ${item.name} dari keranjang">
+                                <i data-lucide="trash-2" width="20" height="20"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartList.appendChild(itemElement);
+                    subtotal += item.price * item.quantity;
+                });
+
+                // Re-initialize lucide icons for new elements
+                lucide.createIcons();
+            }
+
+            cartSubtotalElement.textContent = `Rp${formatPrice(subtotal)}`;
+            cartFinalTotalElement.textContent = `Rp${formatPrice(subtotal)}`; // Assuming no tax/delivery for now
+        }
+
+        // Fungsi untuk menambahkan/mengurangi/menghapus item dari keranjang
+        function modifyCartItem(itemData, action, quantity = 1) { // action: 'add', 'remove', 'set'
+            let itemInCart = cartItems.find(item => item.id === itemData.id);
+
+            if (action === 'add') {
+                if (itemInCart) {
+                    itemInCart.quantity++;
+                } else {
+                    cartItems.push({ ...itemData, quantity: 1 });
+                }
+            } else if (action === 'remove') { // Decrease quantity
+                if (itemInCart) {
+                    itemInCart.quantity--;
+                    if (itemInCart.quantity <= 0) {
+                        cartItems = cartItems.filter(item => item.id !== itemData.id);
+                    }
+                }
+            } else if (action === 'set') { // Set specific quantity (used for full removal)
+                if (quantity <= 0) {
+                    cartItems = cartItems.filter(item => item.id !== itemData.id);
+                } else {
+                    if (itemInCart) {
+                        itemInCart.quantity = quantity;
+                    } else {
+                        // This case generally shouldn't happen with 'set' action unless it's initial add
+                        cartItems.push({ ...itemData, quantity: quantity });
+                    }
+                }
+            }
+            
             updateCartHeaderCount();
             updateFloatingCart();
+            // Hanya update modal jika sedang terbuka, untuk performa
+            if (document.getElementById('cart-modal-overlay').classList.contains('open')) {
+                 updateCartModal(); 
+            }
+            updateMenuItemQuantities(); // Update quantity display on menu cards
         }
+
+        // Fungsi untuk memperbarui tampilan jumlah pada kartu menu
+        function updateMenuItemQuantities() {
+            menuItemsData.forEach(menuItem => {
+                const cardElement = document.querySelector(`.menu-card[data-id="${menuItem.id}"]`);
+                if (!cardElement) return; // Skip if card not found
+
+                const addToCartBtn = cardElement.querySelector('.add-to-cart-btn');
+                const quantityControls = cardElement.querySelector('.menu-item-quantity-controls'); // Get existing controls
+
+                const itemInCart = getCartItemById(menuItem.id);
+
+                if (itemInCart && itemInCart.quantity > 0) {
+                    addToCartBtn.classList.add('hidden');
+                    quantityControls.classList.add('visible');
+                    // Update the input value directly
+                    quantityControls.querySelector('.quantity-input-menu-card').value = itemInCart.quantity;
+                } else {
+                    addToCartBtn.classList.remove('hidden');
+                    quantityControls.classList.remove('visible');
+                    // Set value back to 0 when item is removed from cart
+                    if (quantityControls.querySelector('.quantity-input-menu-card')) {
+                         quantityControls.querySelector('.quantity-input-menu-card').value = 0;
+                    }
+                }
+            });
+        }
+
 
         // Fungsi untuk membuat elemen kartu menu
         function createMenuItemCard(item) {
             const card = document.createElement('div');
-            card.className = "bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl border border-gray-200 group flex-shrink-0 w-72 md:w-80 lg:w-96";
+            card.className = "bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl border border-gray-200 group flex-shrink-0 w-72 md:w-80 lg:w-96 menu-card";
+            card.dataset.id = item.id; // Add data-id for easy lookup
+
             card.innerHTML = `
                 <div class="relative overflow-hidden">
                     <img src="${item.image}" alt="${item.name}" class="w-full h-52 object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/400x250/FFE8CC/6B4000?text=Food';">
@@ -834,14 +1327,26 @@
                     <h3 class="text-2xl font-bold text-gray-800 mb-2">${item.name}</h3>
                     <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-4">
                         <span class="text-orange-600 text-3xl font-extrabold">Rp${formatPrice(item.price)}</span>
-                        <button class="add-to-cart-btn btn btn-primary">
+                        <button class="add-to-cart-btn btn btn-primary" data-id="${item.id}">
                             Pesan
                         </button>
+                        <div class="menu-item-quantity-controls">
+                            <button class="decrease-quantity-menu-card" data-id="${item.id}">-</button>
+                            <input type="number" value="0" min="0" readonly class="quantity-input-menu-card" data-id="${item.id}">
+                            <button class="increase-quantity-menu-card" data-id="${item.id}">+</button>
+                        </div>
                     </div>
                 </div>
             `;
-            // Menambahkan event listener ke tombol "Pesan"
-            card.querySelector('.add-to-cart-btn').addEventListener('click', () => addToCart(item));
+            
+            // Initial event listener for the "Pesan" button
+            const addToCartBtn = card.querySelector('.add-to-cart-btn');
+            addToCartBtn.addEventListener('click', (e) => {
+                const id = parseInt(e.currentTarget.dataset.id);
+                const itemToAdd = menuItemsData.find(m => m.id === id);
+                modifyCartItem(itemToAdd, 'add');
+            });
+
             return card;
         }
 
@@ -879,7 +1384,7 @@
             return `https://wa.me/${restaurantInfo.whatsappNumber}?text=${encodedMessage}`;
         }
 
-        // --- Inisialisasi Konten Saat Halaman Dimuat ---
+        // --- Event Listeners & Initializations ---
         document.addEventListener('DOMContentLoaded', () => {
             // Set tahun di footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -897,19 +1402,113 @@
             menuItemsData.forEach(item => {
                 menuContainer.appendChild(createMenuItemCard(item));
             });
+            // Initial update to show correct state for menu items
+            updateMenuItemQuantities(); 
+
+            // Event delegation for quantity controls on menu cards
+            menuContainer.addEventListener('click', (e) => {
+                const target = e.target;
+                if (target.classList.contains('increase-quantity-menu-card')) {
+                    const id = parseInt(target.dataset.id);
+                    const item = menuItemsData.find(m => m.id === id);
+                    modifyCartItem(item, 'add');
+                } else if (target.classList.contains('decrease-quantity-menu-card')) {
+                    const id = parseInt(target.dataset.id);
+                    const item = menuItemsData.find(m => m.id === id);
+                    modifyCartItem(item, 'remove');
+                }
+            });
+
 
             // Render Testimonials
             const testimonialsContainer = document.getElementById('testimonials-container');
-            testimonialsData.forEach(testimonial => {
+            testimonialsData.forEach(testimonial => { // FIX: testimonialsData was referenced here
                 testimonialsContainer.appendChild(createTestimonialCard(testimonial));
             });
 
-            // Event Listener untuk tombol Checkout
-            document.getElementById('checkout-button').addEventListener('click', () => {
+            // --- Cart Modal Logic ---
+            const cartModalOverlay = document.getElementById('cart-modal-overlay');
+            const cartModalCloseBtn = cartModalOverlay.querySelector('.cart-modal-close-btn');
+            const cartIconBtn = document.getElementById('cart-icon-btn');
+            const floatingCartCheckoutBtn = document.getElementById('checkout-button');
+            const cartModalCheckoutBtn = document.getElementById('cart-modal-checkout-btn');
+            const cartItemsList = document.getElementById('cart-items-list');
+
+            function openCartModal() {
+                updateCartModal(); // Ensure latest cart items are shown
+                cartModalOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling body
+            }
+
+            function closeCartModal() {
+                cartModalOverlay.classList.remove('open');
+                document.body.style.overflow = ''; // Restore body scrolling
+            }
+
+            cartIconBtn.addEventListener('click', openCartModal);
+            floatingCartCheckoutBtn.addEventListener('click', openCartModal);
+            cartModalCloseBtn.addEventListener('click', closeCartModal);
+            cartModalOverlay.addEventListener('click', (e) => {
+                if (e.target === cartModalOverlay) { // Close when clicking outside content
+                    closeCartModal();
+                }
+            });
+            cartModalCheckoutBtn.addEventListener('click', () => {
                 window.open(generateWhatsAppMessage(), '_blank');
+                closeCartModal();
             });
 
-            // Header scroll effect
+            // Event delegation for quantity changes in cart modal
+            cartItemsList.addEventListener('click', (e) => {
+                if (e.target.classList.contains('increase-quantity')) {
+                    const id = parseInt(e.target.dataset.id);
+                    const item = menuItemsData.find(m => m.id === id);
+                    modifyCartItem(item, 'add');
+                } else if (e.target.classList.contains('decrease-quantity')) {
+                    const id = parseInt(e.target.dataset.id);
+                    const item = menuItemsData.find(m => m.id === id);
+                    modifyCartItem(item, 'remove');
+                } else if (e.target.closest('.cart-item-remove-btn')) { // Use closest for trash icon
+                    const id = parseInt(e.target.closest('.cart-item-remove-btn').dataset.id);
+                    const item = menuItemsData.find(m => m.id === id);
+                    modifyCartItem(item, 'set', 0); // Set quantity to 0 to remove
+                }
+            });
+
+
+            // --- Mobile Navigation Logic ---
+            const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn');
+            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+            const mobileNavSidebar = document.getElementById('mobile-nav-sidebar');
+            const mobileNavCloseBtn = mobileNavSidebar.querySelector('.mobile-nav-close-btn');
+            const mobileNavLinks = mobileNavSidebar.querySelectorAll('.mobile-nav-links a');
+
+            function openMobileNav() {
+                mobileNavOverlay.classList.add('open');
+                mobileNavSidebar.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling body
+            }
+
+            function closeMobileNav() {
+                mobileNavOverlay.classList.remove('open');
+                mobileNavSidebar.classList.remove('open');
+                document.body.style.overflow = ''; // Restore body scrolling
+            }
+
+            hamburgerMenuBtn.addEventListener('click', openMobileNav);
+            mobileNavCloseBtn.addEventListener('click', closeMobileNav);
+            mobileNavOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileNavOverlay) { // Close when clicking outside sidebar
+                    closeMobileNav();
+                }
+            });
+
+            // Close mobile nav when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMobileNav);
+            });
+
+            // --- Header Scroll Effect ---
             const header = document.getElementById('main-header');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) { // Jika discroll lebih dari 50px
