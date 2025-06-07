@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayam Kremes Mas Jono - Sensasi Renyah dan Gurih</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Base Styles & Utilities (mirip Tailwind CSS) */
+        :root {
+            /* Warna Baru: Nuansa Oranye-Coklat yang Hangat dan Modern */
+            --color-primary-dark: #D35400; /* Deep Orange for accents/hover */
+            --color-primary-medium: #E67E22; /* Main inviting orange */
+            --color-primary-light: #F39C12; /* Lighter amber for gradients */
+            --color-accent-gold: #FFD700; /* Emas cerah untuk highlight */
+
+            --color-background-main: #FDF5E6; /* Creamy light background */
+            --color-background-section: #FFF8F0; /* Slightly darker creamy for sections */
+            --color-background-card: #FFFFFF;
+
+            --color-text-dark: #362F2E; /* Dark charcoal/brown for main text */
+            --color-text-medium: #7F6A5B; /* Medium brown/gray for secondary text */
+            --color-text-light: #CEC0B7; /* Very light brown/gray for subtle elements */
+            --color-text-white: #FFFFFF;
+
+            --color-red-alert: #EF4444; /* Standard red for alerts/warnings */
+
+            /* Mengganti variabel lama dengan yang baru untuk konsistensi */
+            --color-orange-500: var(--color-primary-medium);
+            --color-orange-600: var(--color-primary-dark);
+            --color-orange-700: #C0392B; /* A stronger, darker red-orange */
+            --color-orange-800: #A03020; /* Even darker for deep accents */
+            --color-yellow-500: var(--color-primary-light);
+            --color-yellow-600: var(--color-primary-medium); /* Adjusting yellow to primary range */
+            --color-gray-50: var(--color-background-main);
+            --color-gray-100: var(--color-background-section);
+            --color-gray-200: #E0D7D0; /* Lighter border/divider */
+            --color-gray-400: var(--color-text-light);
+            --color-gray-500: var(--color-text-medium);
+            --color-gray-600: var(--color-text-medium);
+            --color-gray-700: var(--color-text-dark);
+            --color-gray-800: var(--color-text-dark);
+            --color-gray-900: #2C2625; /* Dark footer background */
+            --color-red-500: var(--color-red-alert);
+            --color-red-400: #F87171;
+            --color-amber-300: var(--color-accent-gold);
+
+            /* Custom RGB for shadows - for more precise shadow colors */
+            --color-primary-dark-rgb: 211, 84, 0;
+            --color-primary-medium-rgb: 230, 126, 34;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--color-background-section); /* Menggunakan warna baru */
+            color: var(--color-text-dark); /* Menggunakan warna baru */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Generic container for max-width and centering */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Flexbox & Grid Utilities (tetap sama) */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-shrink-0 { flex-shrink: 0; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 640px) { .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 768px) { .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+        /* Spacing Utilities (tetap sama) */
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .p-10 { padding: 2.5rem; }
+        .p-12 { padding: 3rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+        .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .ml-2 { margin-left: 0.5rem; }
+        .ml-4 { margin-left: 1rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mx-4 { margin-left: 1rem; margin-right: 1rem; }
+        .my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-10 { margin-bottom: 2.5rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mt-3 { margin-top: 0.75rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-10 { margin-top: 2.5rem; }
+        .mt-14 { margin-top: 3.5rem; }
+        .pt-3 { padding-top: 0.75rem; }
+        .pt-4 { padding-top: 1rem; }
+        .pt-6 { padding-top: 1.5rem; }
+        .pt-8 { padding-top: 2rem; }
+        .pb-6 { padding-bottom: 1.5rem; }
+        .space-x-2 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 0.5rem; }
+        .space-x-4 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 1rem; }
+        .space-x-6 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 1.5rem; }
+        .space-x-8 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 2rem; }
+        .space-x-10 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 2.5rem; }
+        .space-y-2 > *:not([hidden]) ~ *:not([hidden]) { margin-top: 0.5rem; }
+        .space-y-3 > *:not([hidden]) ~ *:not([hidden]) { margin-top: 0.75rem; }
+        .space-y-4 > *:not([hidden]) ~ *:not([hidden]) { margin-top: 1rem; }
+        .gap-1 { gap: 0.25rem; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-8 { gap: 2rem; }
+        .gap-10 { gap: 2.5rem; }
+        .gap-12 { gap: 3rem; }
+        .gap-16 { gap: 4rem; }
+        .-mb-6 { margin-bottom: -1.5rem; }
+        .-top-2 { top: -0.5rem; }
+        .-right-2 { right: -0.5rem; }
+        .-translate-y-4 { transform: translateY(-1rem); }
+        .mt-0\.5 { margin-top: 0.125rem; }
+
+        /* Typography Utilities */
+        .text-white { color: var(--color-text-white); }
+        .text-gray-100 { color: var(--color-background-section); } /* Menggunakan warna baru */
+        .text-gray-400 { color: var(--color-text-light); } /* Menggunakan warna baru */
+        .text-gray-500 { color: var(--color-text-medium); } /* Menggunakan warna baru */
+        .text-gray-600 { color: var(--color-text-medium); } /* Menggunakan warna baru */
+        .text-gray-700 { color: var(--color-text-dark); } /* Menggunakan warna baru */
+        .text-gray-800 { color: var(--color-text-dark); } /* Menggunakan warna baru */
+        .text-gray-900 { color: var(--color-gray-900); }
+        .text-orange-300 { color: #F79F1F; } /* Warna ikon lebih cerah */
+        .text-orange-400 { color: var(--color-primary-light); } /* Judul footer */
+        .text-orange-500 { color: var(--color-primary-medium); } /* Ikon utama */
+        .text-orange-600 { color: var(--color-primary-dark); } /* Teks hover/Harga */
+        .text-orange-700 { color: var(--color-orange-700); } /* Logo/deep accent */
+        .text-amber-300 { color: var(--color-accent-gold); } /* Headline Hero */
+        .text-red-400 { color: var(--color-red-400); }
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-base { font-size: 1rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .text-5xl { font-size: 3rem; }
+        .text-6xl { font-size: 3.75rem; }
+        .text-7xl { font-size: 4.5rem; }
+        .text-8xl { font-size: 6rem; }
+        @media (min-width: 640px) { .sm\:text-5xl { font-size: 3rem; } .sm\:text-6xl { font-size: 3.75rem; } .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 768px) { .md\:text-xl { font-size: 1.25rem; } .md\:text-2xl { font-size: 1.5rem; } .md\:text-3xl { font-size: 1.875rem; } .md\:text-5xl { font-size: 3rem; } .md\:text-8xl { font-size: 6rem; } .md\:h-\[95vh\] { height: 95vh; } .md\:w-80 { width: 20rem; } .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .lg\:w-96 { width: 24rem; } .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+        .font-extrabold { font-weight: 800; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-medium { font-weight: 500; }
+        .font-light { font-weight: 300; }
+        .tracking-tight { letter-spacing: -0.025em; }
+        .leading-tight { line-height: 1.25; }
+        .leading-relaxed { line-height: 1.625; }
+        .italic { font-style: italic; }
+        .text-center { text-align: center; }
+        .md\:text-left { text-align: left; }
+
+        /* Backgrounds & Borders */
+        .bg-white { background-color: var(--color-background-card); } /* Menggunakan warna baru */
+        .bg-gray-50 { background-color: var(--color-background-main); } /* Menggunakan warna baru */
+        .bg-gray-100 { background-color: var(--color-background-section); } /* Menggunakan warna baru */
+        .bg-gray-800 { background-color: var(--color-text-dark); } /* Menggunakan warna baru */
+        .bg-gray-900 { background-color: var(--color-gray-900); }
+        .bg-orange-600 { background-color: var(--color-primary-dark); } /* Menggunakan warna baru */
+        .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+        .from-orange-600 { --tw-gradient-from: var(--color-primary-medium); --tw-gradient-to: rgba(var(--color-primary-medium-rgb), 0); }
+        .to-yellow-500 { --tw-gradient-to: var(--color-primary-light); }
+        .from-orange-700 { --tw-gradient-from: var(--color-orange-700); --tw-gradient-to: rgba(var(--color-orange-700), 0); }
+        .to-yellow-600 { --tw-gradient-to: var(--color-primary-medium); } /* Menggunakan warna baru */
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+        .from-orange-500 { --tw-gradient-from: var(--color-primary-medium); --tw-gradient-to: rgba(var(--color-primary-medium-rgb), 0); }
+        .hover\:from-orange-600:hover { --tw-gradient-from: var(--color-primary-dark); --tw-gradient-to: rgba(var(--color-primary-dark-rgb), 0); }
+        .hover\:to-yellow-600:hover { --tw-gradient-to: var(--color-primary-medium); }
+        .from-orange-600 { --tw-gradient-from: var(--color-primary-medium); --tw-gradient-to: rgba(var(--color-primary-medium-rgb), 0); }
+        .hover\:from-orange-700:hover { --tw-gradient-from: var(--color-orange-700); --tw-gradient-to: rgba(var(--color-orange-700), 0); }
+
+        /* Borders & Radii */
+        .border { border-width: 1px; }
+        .border-b { border-bottom-width: 1px; }
+        .border-gray-100 { border-color: var(--color-background-section); } /* Menggunakan warna baru */
+        .border-gray-200 { border-color: var(--color-gray-200); } /* Menggunakan warna baru */
+        .border-gray-700 { border-color: var(--color-gray-700); }
+        .border-white { border-color: white; }
+        .border-opacity-20 { border-color: rgba(255, 255, 255, 0.2); }
+        .border-opacity-30 { border-color: rgba(255, 255, 255, 0.3); }
+        .border-2 { border-width: 2px; }
+        .border-orange-700 { border-color: var(--color-orange-700); }
+        .border-orange-800 { border-color: var(--color-orange-800); } /* Menggunakan warna baru */
+
+        .rounded-full { border-radius: 9999px; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-3xl { border-radius: 1.5rem; }
+        .rounded-b-lg { border-bottom-left-radius: 0.5rem; border-bottom-right-radius: 0.5rem; }
+        .rounded-b-xl { border-bottom-left-radius: 0.75rem; border-bottom-right-radius: 0.75rem; }
+        .rounded-b-2xl { border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem; }
+        .rounded-b-3xl { border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; }
+        .rounded-t-lg { border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; }
+        .rounded-t-2xl { border-top-left-radius: 1rem; border-top-right-radius: 1rem; }
+        .rounded-t-3xl { border-top-left-radius: 1.5rem; border-top-right-radius: 1.5rem; }
+
+        /* Shadows */
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); }
+        .drop-shadow-md { filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06)); }
+        .drop-shadow-lg { filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1)); }
+        .drop-shadow-xl { filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08)); }
+        .drop-shadow-2xl { filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15)); }
+
+        /* Layout & Position Utilities (tetap sama) */
+        .h-auto { height: auto; }
+        .h-5 { height: 1.25rem; }
+        .h-14 { height: 3.5rem; }
+        .h-16 { height: 4rem; }
+        .h-48 { height: 12rem; }
+        .h-52 { height: 13rem; }
+        .h-\[60vh\] { height: 60vh; }
+        .h-\[70vh\] { height: 70vh; }
+        .h-\[75vh\] { height: 75vh; }
+        .h-\[80vh\] { height: 80vh; }
+        .h-\[90vh\] { height: 90vh; }
+        .h-\[95vh\] { height: 95vh; }
+        .min-h-screen { min-height: 100vh; }
+        .w-full { width: 100%; }
+        .w-5 { width: 1.25rem; }
+        .w-72 { width: 18rem; }
+        @media (min-width: 768px) { .md\:w-1\/2 { width: 50%; } }
+        @media (min-width: 768px) { .md\:w-80 { width: 20rem; } }
+        @media (min-width: 1024px) { .lg\:w-96 { width: 24rem; } }
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-3xl { max-width: 48rem; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-5xl { max-width: 64rem; }
+
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .top-0 { top: 0; }
+        .bottom-0 { bottom: 0; }
+        .bottom-4 { bottom: 1rem; }
+        .bottom-6 { bottom: 1.5rem; }
+        .right-6 { right: 1.5rem; }
+        .left-0 { left: 0; }
+        .left-4 { left: 1rem; }
+        .left-6 { left: 1.5rem; }
+        .z-0 { z-index: 0; }
+        .z-10 { z-index: 10; }
+        .z-40 { z-index: 40; }
+        .z-50 { z-index: 50; }
+        .overflow-hidden { overflow: hidden; }
+        .overflow-x-auto { overflow-x: auto; }
+
+        /* Transformations */
+        .transform { transform: var(--tw-transform); }
+        .rotate-3 { --tw-rotate: 3deg; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .-translate-y-4 { --tw-translate-y: -1rem; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .hover\:scale-105:hover { --tw-scale-x: 1.05; --tw-scale-y: 1.05; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .hover\:scale-\[1\.02\]:hover { --tw-scale-x: 1.02; --tw-scale-y: 1.02; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .hover\:scale-\[1\.03\]:hover { --tw-scale-x: 1.03; --tw-scale-y: 1.03; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .group-hover\:scale-105:hover { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
+        .group-hover\:scale-110:hover { --tw-scale-x: 1.1; --tw-scale-y: 1.1; }
+        .group-hover\:translate-x-1:hover { --tw-translate-x: 0.25rem; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .hover\:rotate-0:hover { --tw-rotate: 0deg; transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+
+        /* Transitions & Animations */
+        .transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; }
+        .duration-200 { transition-duration: 200ms; }
+        .duration-300 { transition-duration: 300ms; }
+        .duration-500 { transition-duration: 500ms; }
+        .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
+        .animate-bounceIn { animation: bounceIn 0.5s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Opacity & Blur */
+        .opacity-10 { opacity: 0.1; }
+        .opacity-20 { opacity: 0.2; }
+        .opacity-30 { opacity: 0.3; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-60 { opacity: 0.6; }
+        .opacity-70 { opacity: 0.7; } /* Added for hero overlay */
+        .opacity-90 { opacity: 0.9; }
+        .opacity-95 { opacity: 0.95; }
+        .bg-opacity-90 { background-color: rgba(255, 255, 255, 0.9); }
+        .bg-opacity-40 { background-color: rgba(0, 0, 0, 0.4); }
+        .backdrop-blur-sm { backdrop-filter: blur(2px); }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px; /* Tinggi scrollbar horizontal */
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--color-background-section); /* Warna track scrollbar */
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--color-primary-medium); /* Warna thumb scrollbar */
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary-dark); /* Warna thumb saat hover */
+        }
+        /* Hide scrollbar on Firefox */
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-primary-medium) var(--color-background-section);
+        }
+
+        /* Sticky & Fixed Positioning */
+        .sticky { position: sticky; }
+        .fixed { position: fixed; }
+        .top-0 { top: 0; }
+
+        /* Other Utilities */
+        .object-cover { object-fit: cover; }
+        
+        /* Navigasi Link Styling - REMOVED UNDERLINE */
+        nav a {
+            text-decoration: none; /* Menghilangkan underline secara default */
+            position: relative;
+            padding-bottom: 4px; /* Ruang untuk efek underline */
+        }
+        nav a span.underline-effect { /* Untuk underline efek hover */
+            position: absolute;
+            left: 0;
+            bottom: 0px; /* Posisikan di bawah */
+            width: 100%;
+            height: 2px; /* Ketebalan underline */
+            background-color: var(--color-orange-600); /* Menggunakan warna baru */
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth cubic bezier transition */
+            border-radius: 9999px;
+            transform-origin: left;
+        }
+        nav a:hover span.underline-effect {
+            transform: scaleX(1);
+        }
+
+        /* Maps Link Styling - REMOVED UNDERLINE */
+        #maps-link {
+            text-decoration: none; /* Menghilangkan underline */
+            color: var(--color-text-light); /* Warna teks link */
+        }
+        #maps-link:hover {
+            text-decoration: none; /* Bisa tambahkan underline saat hover jika diinginkan */
+            text-underline-offset: 3px;
+            color: var(--color-orange-300); /* Warna hover untuk link */
+        }
+
+        .flex-shrink-0 { flex-shrink: 0; }
+        .w-72 { width: 18rem; }
+        .md\:w-80 { width: 20rem; }
+        .lg\:w-96 { width: 24rem; }
+
+        /* Responsive adjustments for specific elements */
+        @media (max-width: 767px) {
+            .header-nav-wrapper {
+                flex-grow: 1; 
+                justify-content: flex-end; 
+                gap: 1rem; 
+            }
+            .header-nav {
+                display: none; /* Sembunyikan navigasi di layar kecil, bisa diganti dengan menu burger */
+            }
+        }
+
+        /* Specific enhancements */
+        .hero-bg-fixed {
+            background-attachment: scroll; /* Menghapus efek parallax jika tidak diinginkan untuk logo */
+        }
+
+        /* Custom Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* ease-in-out */
+            box-shadow: 0 5px 15px rgba(var(--color-primary-medium-rgb), 0.25);
+            border: 2px solid transparent;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--color-primary-medium), var(--color-primary-light));
+            color: var(--color-text-white);
+            border-color: var(--color-primary-dark);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-medium));
+            box-shadow: 0 10px 25px rgba(var(--color-primary-dark-rgb), 0.35);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .btn-primary:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 8px rgba(var(--color-primary-dark-rgb), 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--color-background-card);
+            color: var(--color-primary-dark);
+            border-color: var(--color-primary-medium);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .btn-secondary:hover {
+            background: var(--color-background-section);
+            color: var(--color-orange-700);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .btn-secondary:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Applying button styles */
+        .cta-button {
+            padding: 1rem 2.5rem; /* py-4 px-10 */
+            font-size: 1.25rem; /* text-xl */
+        }
+        .add-to-cart-btn {
+            padding: 0.625rem 1.25rem; /* px-5 py-2.5 */
+            font-size: 1rem; /* text-base */
+        }
+        #checkout-button {
+            padding: 0.75rem 1.25rem; /* px-5 py-2 */
+            font-size: 1rem; /* text-base */
+            margin-left: 1rem; /* ml-4 */
+        }
+        #checkout-button i {
+            margin-left: 0.25rem; /* ml-1 */
+            transition: transform 0.3s ease-in-out;
+        }
+        #checkout-button:hover i {
+            transform: translateX(0.125rem); /* group-hover:translate-x-1 */
+        }
+
+        /* Testimonial Quote Icon */
+        .testimonial-card::before {
+            content: open-quote;
+            font-family: serif; /* Ensure it's a serif font for quote */
+            font-size: 5rem; /* Larger quote icon */
+            color: var(--color-primary-medium); /* Menggunakan warna baru */
+            position: absolute;
+            top: 0.5rem; /* Adjust position */
+            left: 1rem;
+            opacity: 0.1;
+            line-height: 1;
+            z-index: 0; /* Ensure it's behind text */
+        }
+        .testimonial-card {
+            position: relative;
+            text-align: left; /* Align text within card */
+            overflow: hidden; /* Hide overflowing quote */
+        }
+        .testimonial-card p.italic {
+            position: relative; /* Ensure text is above pseudo-element */
+            z-index: 1;
+            padding-top: 1.5rem; /* Adjust for quote icon */
+        }
+
+        /* Header Scroll Effect */
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.98); /* Lebih solid saat discroll */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); /* Shadow lebih kuat */
+        }
+
+        /* Hero section specific enhancements (adapted for logo-only) */
+        #beranda { /* Menggunakan ID untuk spesifisitas */
+            position: relative;
+            height: 75vh; /* Atau sesuai kebutuhan Anda */
+            min-height: 300px; /* Contoh min-height */
+            display: flex;
+            flex-direction: column; /* Untuk menempatkan tombol di bawah logo */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white; /* Default text color, though no text here */
+            overflow: hidden;
+            background-image: url('mas jono last.jpg'); /* Menggunakan logo sebagai background */
+            background-repeat: no-repeat; /* Tidak mengulang gambar */
+            background-position: center center; /* Memposisikan logo di tengah */
+            background-size: contain; /* Memastikan seluruh logo terlihat */
+            background-color: var(--color-background-main); /* Warna fallback/solid background */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Sedikit shadow untuk pemisahan */
+            border-radius: 0 0 3rem 3rem; /* Rounded bottom */
+            margin-top: 0; /* Pastikan margin atas 0 jika header sticky */
+            margin-bottom: 0; /* Pastikan margin bawah 0 */
+            padding: 0; /* Hapus padding default section */
+        }
+
+        #beranda::before { /* Pseudo-element untuk overlay lembut atau background texture */
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1); /* Overlay lembut untuk kontras tombol */
+            z-index: 0; /* Di bawah konten utama */
+        }
+
+        #beranda > div { /* Target the div containing the button */
+            position: relative; /* Memastikan konten di atas background dan overlay */
+            z-index: 10;
+            background-color: transparent !important; /* Pastikan tidak ada bg overlay lain */
+            backdrop-filter: none !important; /* Pastikan tidak ada blur lain */
+            border: none !important; /* Pastikan tidak ada border lain */
+            box-shadow: none !important; /* Pastikan tidak ada shadow lain */
+            padding: 2rem !important; /* Sesuaikan padding tombol */
+            transform: translateY(0) !important; /* Hilangkan translate */
+            max-width: none !important; /* Lebar tombol */
+            margin-top: 2rem; /* Atur margin atas tombol agar tidak terlalu di atas */
+        }
+
+        /* Hapus kelas-kelas yang tidak lagi relevan dari Hero Section */
+        .hero-section-overlay {
+            display: none; /* Karena sudah diganti dengan #beranda::before */
+        }
+        .absolute.inset-0.bg-black.opacity-70 { /* Ini duplikat dan harus dihapus */
+            display: none;
+        }
+        .absolute.inset-0.z-0.opacity-10 { /* Ini duplikat dan harus dihapus */
+            display: none;
+        }
+        /* Animasi pada elemen yang dihapus */
+        .hero-title, .hero-description, .hero-cta-button {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            animation-delay: 0s !important;
+        }
+        
+        /* Ensure the logo banner section is removed */
+        .logo-banner-section {
+            display: none; /* Hide the section if it was kept separately */
+        }
+        header #main-header a[href="#beranda"] {
+            text-decoration: none !important; /* Memastikan tidak ada underline */
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 antialiased">
+    <header id="main-header" class="bg-white shadow-2xl p-4 md:p-6 sticky top-0 z-50 rounded-b-3xl border-b border-gray-100 backdrop-blur-sm bg-opacity-90" style="box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#beranda" class="text-2xl md:text-3xl font-extrabold text-orange-700 tracking-tight flex items-center gap-2 transform hover:scale-105 transition-transform duration-200 drop-shadow-md" aria-label="Ayam Kremes Mas Jono Beranda">
+                <i data-lucide="chef-hat" class="text-orange-500" width="36" height="36" aria-hidden="true"></i> Ayam Kremes Mas Jono
+            </a>
+            <div class="flex items-center space-x-4 md:space-x-8 header-nav-wrapper">
+                <nav class="flex items-center space-x-4 md:space-x-8 header-nav" aria-label="Navigasi Utama">
+                    <a href="#beranda" class="text-gray-700 hover:text-orange-600 transition-colors font-semibold relative group text-lg">
+                        Beranda
+                        <span class="underline-effect"></span>
+                    </a>
+                    <a href="#menu" class="text-gray-700 hover:text-orange-600 transition-colors font-semibold relative group text-lg">
+                        Menu
+                        <span class="underline-effect"></span>
+                    </a>
+                    <a href="#tentang" class="text-gray-700 hover:text-orange-600 transition-colors font-semibold relative group text-lg">
+                        Tentang Kami
+                        <span class="underline-effect"></span>
+                    </a>
+                    <a href="#kontak" class="text-gray-700 hover:text-orange-600 transition-colors font-semibold relative group text-lg">
+                        Kontak
+                        <span class="underline-effect"></span>
+                    </a>
+                </nav>
+                <div class="relative ml-4" aria-label="Keranjang Belanja">
+                    <i data-lucide="shopping-cart" class="text-gray-700" width="24" height="24" aria-hidden="true"></i>
+                    <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden" aria-live="polite" aria-atomic="true">
+                        0
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="beranda" class="relative h-[75vh] md:h-[95vh] flex items-center justify-center text-center text-white overflow-hidden rounded-b-3xl mx-4 my-2">
+            <div class="relative z-10 p-6 md:p-12 max-w-5xl mx-auto transform -translate-y-4 animate-fadeIn">
+                <a href="#menu" class="inline-flex items-center btn cta-button">
+                </a>
+            </div>
+        </section>
+
+        <section id="menu" class="py-20 bg-gray-50 px-4 md:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">Pilihan Terbaik dari Mas Jono</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-16">
+                    Pilihlah dari beragam menu ayam kremes terbaik yang disajikan dengan resep rahasia Mas Jono. Setiap hidangan kami siapkan dengan cinta, dijamin bikin ketagihan!
+                </p>
+                <div id="menu-items-container" class="flex overflow-x-auto snap-x snap-mandatory pb-6 -mb-6 space-x-6 md:space-x-8 lg:space-x-10 custom-scrollbar">
+                    </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="py-20 bg-white px-4 md:px-8">
+            <div class="container mx-auto flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2 relative">
+                    <img src="mas foto.jpeg" alt="Mas Jono Founder" class="w-full h-auto rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                    <div class="absolute bottom-6 left-6 bg-orange-600 text-white px-5 py-2.5 rounded-lg text-lg font-semibold shadow-lg">
+                        Berdiri Sejak 1995
+                    </div>
+                </div>
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 drop-shadow-lg">Cerita di Balik Kelezatan Mas Jono</h2>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                        <strong>Ayam Kremes Mas Jono</strong> didirikan pada tahun 1995, berawal dari mimpi sederhana Mas Jono untuk berbagi kelezatan resep ayam kremes warisan keluarga. Dengan dedikasi dan cinta pada masakan, setiap potong ayam dipilih dengan cermat dan diolah menggunakan bumbu rahasia yang telah disempurnakan selama puluhan tahun.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-8">
+                        Kami percaya bahwa makanan bukan sekadar pengisi perut, melainkan pengalaman yang menghangatkan hati. Itulah mengapa kami selalu menjaga kualitas bahan baku dan proses memasak untuk memastikan setiap hidangan Ayam Kremes Mas Jono memberikan sensasi renyah, gurih, dan lezat yang tak terlupakan. Bergabunglah dengan ribuan pelanggan setia kami dan rasakan sendiri bedanya!
+                    </p>
+                    <a href="#kontak" class="inline-flex items-center gap-2 btn cta-button">
+                        <i data-lucide="award" width="22" height="22" aria-hidden="true"></i> Penghargaan & Prestasi <i data-lucide="chevron-right" class="ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50 px-4 md:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">Apa Kata Pelanggan Kami?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-16">
+                    Dengar langsung pengalaman mereka yang telah menikmati kelezatan Ayam Kremes Mas Jono. Kelezatan yang tak terlupakan!
+                </p>
+                <div id="testimonials-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontak" class="bg-gray-900 text-white py-16 px-4 md:px-8 rounded-t-3xl shadow-inner">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="col-span-1">
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-2 text-orange-400 drop-shadow">
+                    <i data-lucide="chef-hat" width="28" height="28" aria-hidden="true"></i> Ayam Kremes Mas Jono
+                </h3>
+                <p class="text-gray-400 text-base leading-relaxed">
+                    Menyajikan kelezatan ayam kremes autentik dengan resep turun-temurun sejak 1995. Kami berkomitmen pada rasa dan kualitas terbaik untuk kepuasan Anda.
+                </p>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-2xl font-bold mb-4 text-orange-400 drop-shadow">Hubungi Kami</h3>
+                <ul class="text-gray-400 space-y-4 text-base">
+                    <li class="flex items-start gap-3">
+                        <a id="maps-link" href="#" target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 hover:text-orange-300 transition-colors" style="text-decoration: none;">
+                            <i data-lucide="map-pin" width="20" height="20" class="mt-0.5 flex-shrink-0 text-orange-300" aria-hidden="true"></i>
+                            <span id="restaurant-address"></span>
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="phone" width="20" height="20" class="text-orange-300" aria-hidden="true"></i> <span id="restaurant-phone"></span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="mail" width="20" height="20" class="text-orange-300" aria-hidden="true"></i> <span id="restaurant-email"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-2xl font-bold mb-4 text-orange-400 drop-shadow">Jam Operasional</h3>
+                <ul class="text-gray-400 space-y-3 text-base">
+                    <li>Senin - Jumat: <span class="font-semibold text-white">10.00 - 22.00 WIB</span></li>
+                    <li>Satlu - Minggu: <span class="font-semibold text-white">10.00 - 23.00 WIB</span></li>
+                    <li>Hari Libur Nasional: <span class="font-semibold text-red-400">Tutup</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-14 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+            © <span id="current-year"></span> Ayam Kremes Mas Jono. Semua Hak Dilindungi.
+        </div>
+    </footer>
+
+    <div id="floating-cart" class="fixed bottom-6 right-6 z-40 hidden">
+        <div class="bg-orange-600 text-white rounded-full p-4 shadow-xl flex items-center justify-center space-x-2">
+            <i data-lucide="shopping-cart" width="24" height="24" aria-hidden="true"></i>
+            <span id="cart-total-items" class="font-bold text-lg" aria-live="polite" aria-atomic="true">0 Item</span>
+            <span class="text-xl mx-2">|</span>
+            <span id="cart-total-price" class="font-bold text-lg">Rp0</span>
+            <button id="checkout-button" class="btn btn-secondary">
+                Bayar <i data-lucide="chevron-right" width="18" height="18" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // --- Data & State Global ---
+        const restaurantInfo = {
+            address: ' RM. Ayam Kremes Mas Jono, Jalan Sukabirus No. C45, Citereup, Dayeuh Kolot, Citeureup, Kec. Dayeuhkolot, Kota Bandung, Jawa Barat 40257',
+            phone: '628121479682',
+            whatsappNumber: '6281214796822', // Format internasional tanpa '+'
+            email: 'info@ayamkremesmasjono.com'
+        };
+
+        const menuItemsData = [
+            { id: 1, name: "Paket Komplit Nasi Ayam Kremes", price: 26000, image: "jono1.jpeg" },
+            { id: 2, name: "Paket Komplit Nasi Ayam Gledek", price: 26000, image: "jono2.jpeg" },
+            { id: 3, name: "Paket Nasi Ayam Bakar Madu", price: 21000, image: "jono3.jpeg" },
+            { id: 4, name: "Es Jeruk", price: 6000, image: "jono4.jpeg" },
+            { id: 5, name: "Capcay Spesial", price: 19000, image: "jono5.jpeg" },
+            { id: 6, name: "Lele Kremes", price: 10000, image: "jono6.jpeg" },
+            { id: 7, name: "Nasi Goreng Spesial", price: 20000, image: "jono7.jpeg" },
+            { id: 8, name: "Kwetiaw Goreng Spesial", price: 19000, image: "jono8.jpeg" },
+        ];
+
+        const testimonialsData = [
+            { quote: "Ayam kremesnya juara! Kremesnya banyak banget dan gurihnya pas, ayamnya juga empuk. Wajib coba, dijamin nagih!", author: "Fitri A.", city: "Bandung" },
+            { quote: "Rasa autentik yang sulit dicari di tempat lain. Selalu jadi pilihan utama kalau lagi pengen ayam kremes. Kualitasnya konsisten!", author: "Bambang S.", city: "Jakarta" },
+            { quote: "Dari pelayanan yang ramah sampai rasa makanan yang luar biasa, Ayam Kremes Mas Jono memang TOP! Tidak pernah mengecewakan.", author: "Dewi P.", city: "Surabaya" },
+            { quote: "Porsi pas, harga bersahabat, dan rasanya bintang lima! Anak-anak saya juga suka sekali kremesnya. Bakal sering beli di sini.", author: "Arif H.", city: "Yogyakarta" }
+        ];
+
+        let cartItems = []; // Array untuk menyimpan item di keranjang
+
+        // --- Fungsi Helper ---
+
+        // Fungsi untuk memformat harga ke format mata uang Rupiah
+        function formatPrice(price) {
+            return price.toLocaleString('id-ID');
+        }
+
+        // Fungsi untuk memperbarui tampilan keranjang di header
+        function updateCartHeaderCount() {
+            const cartItemCountElement = document.getElementById('cart-item-count');
+            const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            if (totalCount > 0) {
+                cartItemCountElement.textContent = totalCount;
+                cartItemCountElement.classList.remove('hidden');
+                // Animasi bounceIn bisa di-trigger ulang jika diinginkan
+                cartItemCountElement.classList.remove('animate-bounceIn');
+                void cartItemCountElement.offsetWidth; // Trigger reflow
+                cartItemCountElement.classList.add('animate-bounceIn');
+            } else {
+                cartItemCountElement.classList.add('hidden');
+            }
+        }
+
+        // Fungsi untuk memperbarui tampilan floating cart
+        function updateFloatingCart() {
+            const floatingCartElement = document.getElementById('floating-cart');
+            const cartTotalItemsElement = document.getElementById('cart-total-items');
+            const cartTotalPriceElement = document.getElementById('cart-total-price');
+
+            const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            if (totalCount > 0) {
+                floatingCartElement.style.display = 'flex'; // Make it visible
+                cartTotalItemsElement.textContent = `${totalCount} Item`;
+                cartTotalPriceElement.textContent = `Rp${formatPrice(totalPrice)}`;
+                // Animasi bounceIn bisa di-trigger ulang jika diinginkan
+                floatingCartElement.classList.remove('animate-bounceIn');
+                void floatingCartElement.offsetWidth; // Trigger reflow
+                floatingCartElement.classList.add('animate-bounceIn');
+            } else {
+                floatingCartElement.style.display = 'none'; // Hide if empty
+            }
+        }
+
+        // Fungsi untuk menambahkan item ke keranjang
+        function addToCart(item) {
+            const existingItemIndex = cartItems.findIndex(i => i.name === item.name);
+            if (existingItemIndex > -1) {
+                cartItems[existingItemIndex].quantity += 1;
+            } else {
+                cartItems.push({ ...item, quantity: 1 });
+            }
+            updateCartHeaderCount();
+            updateFloatingCart();
+        }
+
+        // Fungsi untuk membuat elemen kartu menu
+        function createMenuItemCard(item) {
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl border border-gray-200 group flex-shrink-0 w-72 md:w-80 lg:w-96";
+            card.innerHTML = `
+                <div class="relative overflow-hidden">
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-52 object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/400x250/FFE8CC/6B4000?text=Food';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-20"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${item.name}</h3>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-4">
+                        <span class="text-orange-600 text-3xl font-extrabold">Rp${formatPrice(item.price)}</span>
+                        <button class="add-to-cart-btn btn btn-primary">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+            `;
+            // Menambahkan event listener ke tombol "Pesan"
+            card.querySelector('.add-to-cart-btn').addEventListener('click', () => addToCart(item));
+            return card;
+        }
+
+        // Fungsi untuk membuat elemen testimonial
+        function createTestimonialCard(testimonial) {
+            const card = document.createElement('div');
+            card.className = "bg-white p-8 rounded-2xl shadow-xl flex flex-col justify-between h-full transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl border border-gray-200 testimonial-card";
+            card.innerHTML = `
+                <p class="text-gray-700 italic text-lg mb-6 leading-relaxed">"${testimonial.quote}"</p>
+                <div>
+                    <p class="font-bold text-gray-900 text-xl">${testimonial.author}</p>
+                    <p class="text-sm text-gray-500">${testimonial.city}</p>
+                </div>
+            `;
+            return card;
+        }
+
+        // Fungsi untuk menghasilkan pesan WhatsApp
+        function generateWhatsAppMessage() {
+            if (cartItems.length === 0) {
+                return "Halo Mas Jono, saya ingin memesan tapi keranjang saya kosong. Mohon bantuan.";
+            }
+
+            let message = "Halo Mas Jono, saya ingin memesan:\n\n";
+            cartItems.forEach(item => {
+                message += `- ${item.name} (${item.quantity} porsi) - Rp${formatPrice(item.price * item.quantity)}\n`;
+            });
+            message += `\nTotal: Rp${formatPrice(cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0))}\n\n`;
+            message += "Mohon konfirmasi pesanan saya. Terima kasih!";
+
+            // Tambahan pesan untuk pembayaran QRIS
+            message += "\nUntuk pembayaran, silakan transfer ke rekening kami atau scan QRIS yang tertera di foto profil WhatsApp kami. Mohon kirimkan bukti pembayarannya setelah transaksi berhasil.";
+
+            const encodedMessage = encodeURIComponent(message);
+            return `https://wa.me/${restaurantInfo.whatsappNumber}?text=${encodedMessage}`;
+        }
+
+        // --- Inisialisasi Konten Saat Halaman Dimuat ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set tahun di footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Set info restoran di footer
+            document.getElementById('restaurant-address').textContent = restaurantInfo.address;
+            document.getElementById('restaurant-phone').textContent = restaurantInfo.phone;
+            document.getElementById('restaurant-email').textContent = restaurantInfo.email;
+            
+            // Set link Google Maps
+            document.getElementById('maps-link').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurantInfo.address)}`;
+
+            // Render Menu Items
+            const menuContainer = document.getElementById('menu-items-container');
+            menuItemsData.forEach(item => {
+                menuContainer.appendChild(createMenuItemCard(item));
+            });
+
+            // Render Testimonials
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            testimonialsData.forEach(testimonial => {
+                testimonialsContainer.appendChild(createTestimonialCard(testimonial));
+            });
+
+            // Event Listener untuk tombol Checkout
+            document.getElementById('checkout-button').addEventListener('click', () => {
+                window.open(generateWhatsAppMessage(), '_blank');
+            });
+
+            // Header scroll effect
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) { // Jika discroll lebih dari 50px
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
