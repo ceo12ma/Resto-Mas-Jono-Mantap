@@ -1376,8 +1376,7 @@
             message += `\nTotal: Rp${formatPrice(cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0))}\n\n`;
             message += "Mohon konfirmasi pesanan saya. Terima kasih!";
 
-            // Tambahan pesan untuk pembayaran QRIS
-            message += "\nUntuk pembayaran, silakan transfer ke rekening kami atau scan QRIS yang tertera di foto profil WhatsApp kami. Mohon kirimkan bukti pembayarannya setelah transaksi berhasil.";
+           
 
             const encodedMessage = encodeURIComponent(message);
             return `https://wa.me/${restaurantInfo.whatsappNumber}?text=${encodedMessage}`;
